@@ -6,7 +6,7 @@ export default function Launch() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-6 relative frame-container">
+    <div className="min-h-screen bg-white flex items-center justify-center px-6 relative">
       {/* Decorative Frame */}
       <div className="absolute inset-6 pointer-events-none frame-border"></div>
 
@@ -21,19 +21,41 @@ export default function Launch() {
           />
         </div>
 
+        {/* Chief Guest */}
+        <div className="mb-10">
+          <p className="text-sm uppercase tracking-widest text-gray-500 mb-2">
+            Chief Guest
+          </p>
+
+          <h2 className="text-3xl md:text-4xl font-semibold text-orange-700">
+            Nomula Karthik Goud
+          </h2>
+
+          <p className="text-base md:text-lg text-gray-600 mt-3 leading-relaxed">
+            With profound honor and immense pride, we respectfully welcome Mr.
+            Nomula Karthik Goud to grace this auspicious occasion and formally
+            inaugurate the launch of our website.
+          </p>
+
+          <div className="mt-5 h-px w-32 bg-orange-300 mx-auto"></div>
+        </div>
+
+        {/* Heading */}
         <h1 className="text-4xl md:text-5xl font-bold text-orange-600 mb-6">
           Welcome to R3 RCM
         </h1>
 
+        {/* Description */}
         <p className="text-lg md:text-xl text-blue-700 mb-10 leading-relaxed">
           R3 RCM is a trusted revenue cycle management partner helping
           healthcare providers streamline operations, improve cash flow, and
           focus on what matters most — patient care.
         </p>
 
+        {/* Launch Button */}
         <button
           onClick={goToSite}
-          className="bg-orange-600 hover:bg-orange-700 text-white text-xl font-semibold px-10 py-5 rounded-lg transition duration-300 shadow-lg mb-10"
+          className="bg-orange-600 hover:bg-orange-700 text-white text-xl font-semibold px-10 py-5 rounded-lg transition duration-300 shadow-lg mb-12"
         >
           Launch R3 RCM Website
         </button>
@@ -85,13 +107,11 @@ export default function Launch() {
           border-radius: 32px;
         }
 
-        /* Outer decorative line */
         .frame-border::before {
-          border: 3px solid #c2410c; /* dark orange */
+          border: 3px solid #c2410c;
           opacity: 0.9;
         }
 
-        /* Inner ornamental offset */
         .frame-border::after {
           inset: 14px;
           border: 1.5px dashed #c2410c;
