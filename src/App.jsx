@@ -18,7 +18,7 @@ import Claymorphism from "./pages/designs/Claymorphism";
 import Animated from "./pages/designs/Animated";
 
 import WebDevelopment from "./pages/expertise/WebDevelopment";
-import SaaSBuild from "./pages/expertise/SaaSBuild";
+import SaaSBuild from "./pages/expertise/SaasBuild";
 import AppDevelopment from "./pages/expertise/AppDevelopment";
 import Branding from "./pages/expertise/Branding";
 import Digitalisation from "./pages/expertise/Digitalization";
