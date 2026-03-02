@@ -24,7 +24,7 @@ import Branding from "./pages/expertise/Branding";
 import Digitalisation from "./pages/expertise/Digitalization";
 import SocialMedia from "./pages/expertise/SocialMedia";
 import GraphicDesign from "./pages/expertise/GraphicDesign";
-import UiUxDesign from "./pages/expertise/UiUxDesign";
+import UiUxDesign from "./pages/expertise/UIUXDesign";
 
 export default function App() {
   return (
