@@ -1,13 +1,87 @@
 @import "tailwindcss";
 
+/* ── Google Fonts ── */
+/* Anton | Great Vibes | Montserrat | Playfair Display
+   loaded via index.html <link> */
 
+/* ── Font variables ── */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --font-anton: 'Anton', sans-serif;
+  /* display / hero h1 */
+  --font-accent: 'Great Vibes', cursive;
+  /* script accents, taglines */
+  --font-sans: 'Montserrat', sans-serif;
+  /* body, labels, nav, buttons */
+  --font-serif: 'Playfair Display', serif;
+  /* section headings, pull-quotes */
+}
 
+/* ── Base typography ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Heading scale ── */
+h1 {
+  font-family: var(--font-anton);
+  font-weight: 400;
+  /* Anton has no weight variants — 400 is its bold */
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+p {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* ── Utility accent class ── */
+.accent {
+  font-family: var(--font-accent);
+  font-weight: 400;
+}
+
+/* ── Scrollbar hide ── */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }

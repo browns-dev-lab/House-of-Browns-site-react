@@ -32,7 +32,7 @@ export default function App() {
       <Navbar />
 
       {/* Push content below fixed navbar */}
-      <main className="min-h-screen">
+      <main className="min-h-screen overflow-x-hidden">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

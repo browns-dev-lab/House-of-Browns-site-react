@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [designOpen, setDesignOpen] = useState(false);
   const [expertiseOpen, setExpertiseOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const designLinks = [
     { label: "Neumorphism", href: "/designs/neumorphism" },
@@ -36,114 +29,129 @@ export default function Navbar() {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white shadow-md" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/55 to-transparent">
+      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold tracking-tight">
+        <Link
+          to="/"
+          className="text-white text-[1rem] font-bold tracking-tight"
+          style={{ fontFamily: "var(--font-serif)" }}
+        >
           House of Browns.
         </Link>
 
-        {/* Desktop Nav */}
-        <ul className="hidden md:flex items-center gap-8 text-sm font-medium">
-          {/* About */}
-          <li>
-            <Link to="/about" className="hover:opacity-60 transition-opacity">
-              About
-            </Link>
-          </li>
+        {/* Desktop: links + CTA pushed to right */}
+        <div className="hidden md:flex items-center gap-7">
+          <ul className="flex items-center gap-7 list-none m-0 p-0">
+            <li>
+              <Link
+                to="/about"
+                className="text-white/80 hover:text-white text-[0.7rem] font-semibold tracking-[0.1em] uppercase transition-all duration-200"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
+                About
+              </Link>
+            </li>
 
-          {/* Designs */}
-          <li
-            className="relative"
-            onMouseEnter={() => setDesignOpen(true)}
-            onMouseLeave={() => setDesignOpen(false)}
-          >
-            <button className="hover:opacity-60 transition-opacity">
-              Designs
-            </button>
-            {designOpen && (
-              <Dropdown wide>
-                {designLinks.map((d) => (
-                  <DropdownLink key={d.href} href={d.href} label={d.label} />
-                ))}
-              </Dropdown>
-            )}
-          </li>
-
-          {/* Case Studies */}
-          <li>
-            <Link
-              to="/case-studies"
-              className="hover:opacity-60 transition-opacity"
+            {/* Designs */}
+            <li
+              className="relative"
+              onMouseEnter={() => setDesignOpen(true)}
+              onMouseLeave={() => setDesignOpen(false)}
             >
-              Case Studies
-            </Link>
-          </li>
+              <button
+                className="text-white/80 hover:text-white text-[0.7rem] font-semibold tracking-[0.1em] uppercase bg-transparent border-none cursor-pointer p-0 transition-all duration-200"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
+                Designs
+              </button>
+              {designOpen && (
+                <Dropdown>
+                  {designLinks.map((d) => (
+                    <DropdownLink key={d.href} href={d.href} label={d.label} />
+                  ))}
+                </Dropdown>
+              )}
+            </li>
 
-          {/* Expertise */}
-          <li
-            className="relative"
-            onMouseEnter={() => setExpertiseOpen(true)}
-            onMouseLeave={() => setExpertiseOpen(false)}
+            <li>
+              <Link
+                to="/case-studies"
+                className="text-white/80 hover:text-white text-[0.7rem] font-semibold tracking-[0.1em] uppercase transition-all duration-200"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
+                Case Studies
+              </Link>
+            </li>
+
+            {/* Expertise */}
+            <li
+              className="relative"
+              onMouseEnter={() => setExpertiseOpen(true)}
+              onMouseLeave={() => setExpertiseOpen(false)}
+            >
+              <button
+                className="text-white/80 hover:text-white text-[0.7rem] font-semibold tracking-[0.1em] uppercase bg-transparent border-none cursor-pointer p-0 transition-all duration-200"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
+                Expertise
+              </button>
+              {expertiseOpen && (
+                <Dropdown>
+                  {expertiseLinks.map((e) => (
+                    <DropdownLink key={e.href} href={e.href} label={e.label} />
+                  ))}
+                </Dropdown>
+              )}
+            </li>
+          </ul>
+
+          {/* CTA */}
+          <Link
+            to="/contact"
+            className="text-[0.65rem] font-semibold tracking-[0.14em] uppercase px-5 py-2 bg-white text-black hover:bg-black hover:text-white transition-all duration-300"
+            style={{ fontFamily: "var(--font-sans)" }}
           >
-            <button className="hover:opacity-60 transition-opacity">
-              Expertise
-            </button>
-            {expertiseOpen && (
-              <Dropdown wide>
-                {expertiseLinks.map((e) => (
-                  <DropdownLink key={e.href} href={e.href} label={e.label} />
-                ))}
-              </Dropdown>
-            )}
-          </li>
-        </ul>
+            Start a Project
+          </Link>
+        </div>
 
-        {/* CTA */}
-        <Link
-          to="/contact"
-          className="hidden md:inline-block bg-black text-white text-sm px-5 py-2.5 rounded-full hover:opacity-80 transition-opacity"
-        >
-          Start a Project
-        </Link>
-
-        {/* Mobile Toggle */}
+        {/* Mobile hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col gap-1"
+          className="md:hidden flex flex-col gap-1.5 bg-transparent border-none cursor-pointer p-0"
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-6 h-0.5 bg-black transition-all ${menuOpen ? "rotate-45 translate-y-1.5" : ""}`}
+            className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[6px]" : ""}`}
           />
           <span
-            className={`block w-6 h-0.5 bg-black transition-all ${menuOpen ? "opacity-0" : ""}`}
+            className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${menuOpen ? "opacity-0 scale-x-0" : ""}`}
           />
           <span
-            className={`block w-6 h-0.5 bg-black transition-all ${menuOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
+            className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[6px]" : ""}`}
           />
         </button>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white border-t px-6 py-4 flex flex-col gap-4 text-sm font-medium">
+        <div
+          className="md:hidden bg-black/95 backdrop-blur-md px-6 py-5 flex flex-col gap-4 text-[0.7rem] font-semibold tracking-[0.1em] uppercase"
+          style={{ fontFamily: "var(--font-sans)" }}
+        >
           <Link
             to="/about"
-            className="mobile-link"
+            className="text-white/80 hover:text-white transition-colors"
             onClick={() => setMenuOpen(false)}
           >
             About
           </Link>
 
-          {/* Designs */}
           <button
             onClick={() => setDesignOpen(!designOpen)}
-            className="mobile-link w-full text-left"
+            className="text-white/80 hover:text-white text-left bg-transparent border-none cursor-pointer text-[0.7rem] font-semibold tracking-[0.1em] uppercase p-0"
+            style={{ fontFamily: "var(--font-sans)" }}
           >
             Designs
           </button>
@@ -153,7 +161,7 @@ export default function Navbar() {
                 <Link
                   key={d.href}
                   to={d.href}
-                  className="text-gray-600 hover:text-black transition-colors"
+                  className="text-white/50 hover:text-white transition-colors text-[0.65rem]"
                   onClick={() => {
                     setMenuOpen(false);
                     setDesignOpen(false);
@@ -167,16 +175,16 @@ export default function Navbar() {
 
           <Link
             to="/case-studies"
-            className="mobile-link"
+            className="text-white/80 hover:text-white transition-colors"
             onClick={() => setMenuOpen(false)}
           >
             Case Studies
           </Link>
 
-          {/* Expertise */}
           <button
             onClick={() => setExpertiseOpen(!expertiseOpen)}
-            className="mobile-link w-full text-left"
+            className="text-white/80 hover:text-white text-left bg-transparent border-none cursor-pointer text-[0.7rem] font-semibold tracking-[0.1em] uppercase p-0"
+            style={{ fontFamily: "var(--font-sans)" }}
           >
             Expertise
           </button>
@@ -186,7 +194,7 @@ export default function Navbar() {
                 <Link
                   key={e.href}
                   to={e.href}
-                  className="text-gray-600 hover:text-black transition-colors"
+                  className="text-white/50 hover:text-white transition-colors text-[0.65rem]"
                   onClick={() => {
                     setMenuOpen(false);
                     setExpertiseOpen(false);
@@ -200,10 +208,10 @@ export default function Navbar() {
 
           <Link
             to="/contact"
-            className="bg-black text-white text-center px-5 py-2.5 rounded-full hover:opacity-80 transition-opacity"
+            className="mt-2 text-center bg-white text-black px-5 py-2.5 font-bold tracking-[0.14em] hover:bg-black hover:text-white border border-white transition-all duration-300"
             onClick={() => setMenuOpen(false)}
           >
-            Start a Project →
+            Start a Project
           </Link>
         </div>
       )}
@@ -211,14 +219,9 @@ export default function Navbar() {
   );
 }
 
-/* Helpers */
-function Dropdown({ children, wide }) {
+function Dropdown({ children }) {
   return (
-    <div
-      className={`absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-xl rounded-xl p-3 flex flex-col gap-1 ${
-        wide ? "w-52" : "w-40"
-      }`}
-    >
+    <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-52 bg-black/95 backdrop-blur-md border border-white/10 p-1.5 flex flex-col gap-0.5 z-50">
       {children}
     </div>
   );
@@ -228,7 +231,8 @@ function DropdownLink({ href, label }) {
   return (
     <Link
       to={href}
-      className="px-3 py-2 text-sm rounded-lg hover:bg-gray-50 transition-colors text-gray-700 hover:text-black"
+      className="px-3 py-2 text-[0.65rem] font-medium tracking-[0.08em] uppercase text-white/60 hover:text-white hover:bg-white/8 transition-all duration-200"
+      style={{ fontFamily: "var(--font-sans)" }}
     >
       {label}
     </Link>
